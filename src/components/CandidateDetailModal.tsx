@@ -125,9 +125,9 @@ export default function CandidateDetailModal({ candidate, onClose }: CandidateDe
           </Button>
         </div>
 
-        <div className="p-6 space-y-6">
+        <div className="p-6 space-y-6" >
           {/* Candidate Info Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center space-x-3">
@@ -164,19 +164,7 @@ export default function CandidateDetailModal({ candidate, onClose }: CandidateDe
               </CardContent>
             </Card>
 
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-3">
-                  <FileText className="h-5 w-5 text-gray-400" />
-                  <div>
-                    <p className="text-xs text-gray-500">Resume</p>
-                    <p className="font-medium text-sm truncate">
-                      {candidate.resume_content?.substring(0, 20)}...
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            
           </div>
 
           {!latestResult ? (
@@ -235,6 +223,13 @@ export default function CandidateDetailModal({ candidate, onClose }: CandidateDe
                       <AlertCircle className="h-5 w-5 mr-2 text-blue-600" />
                       AI Assessment Summary
                     </h4>
+                    {((latestResult.summary || latestResult.aiEvaluation?.summary || '').includes('exited fullscreen')) && (
+                      <div className="mb-3 p-3 rounded bg-yellow-100 text-yellow-800 flex items-center">
+                        <AlertCircle className="h-5 w-5 mr-2 text-yellow-600" />
+                        <span className="font-semibold">Warning:</span>
+                        <span className="ml-2">The candidate exited fullscreen during the interview.</span>
+                      </div>
+                    )}
                     <p className="text-gray-700 leading-relaxed">
                       {latestResult.aiEvaluation?.summary || latestResult.summary}
                     </p>

@@ -1,13 +1,11 @@
+// Minimal ParsedResume type for type safety
+type ParsedResume = {
+  name?: string;
+  email?: string;
+  phone?: string;
+  content: string;
+};
 import mammoth from 'mammoth'
-
-export interface ParsedResume {
-  name?: string
-  email?: string
-  phone?: string
-  content: string
-  confidence?: 'high' | 'medium' | 'low'
-  missingFields?: string[]
-}
 
 export async function parseResume(file: File): Promise<ParsedResume> {
   try {
@@ -43,38 +41,18 @@ export async function parseResume(file: File): Promise<ParsedResume> {
         name: '',
         email: '',
         phone: '',
-        content: `Resume uploaded: ${file.name}`,
-        confidence: 'low',
-        missingFields: ['name', 'email', 'phone']
+        content: `Resume uploaded: ${file.name}`
       }
     }
   }
 }
 
 function validateAndEnhance(data: Partial<ParsedResume>): ParsedResume {
-  const missingFields: string[] = []
-  let confidence: 'high' | 'medium' | 'low' = 'high'
-
-  if (!data.name) {
-    missingFields.push('name')
-    confidence = 'medium'
-  }
-  if (!data.email) {
-    missingFields.push('email')
-    confidence = confidence === 'high' ? 'medium' : 'low'
-  }
-  if (!data.phone) {
-    missingFields.push('phone')
-    confidence = confidence === 'high' ? 'medium' : 'low'
-  }
-
   return {
     name: data.name || '',
     email: data.email || '',
     phone: data.phone || '',
-    content: data.content || 'Resume parsed successfully',
-    confidence,
-    missingFields: missingFields.length > 0 ? missingFields : undefined
+    content: data.content || 'Resume parsed successfully'
   }
 }
 
@@ -108,5 +86,6 @@ function extractInfo(content: string): Partial<ParsedResume> {
     email: content.match(emailRegex)?.[0],
     phone: content.match(phoneRegex)?.[0],
     content
+    
   }
 }

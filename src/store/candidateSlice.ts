@@ -4,11 +4,13 @@ export interface Candidate {
   id: string
   name: string
   email: string
-  phone?: string
+  phone?: string  // Keep as optional
   resume_content: string
   created_at: string
   interview_results?: any[]
+  updated_at?: string
 }
+
 
 interface CandidateState {
   candidates: Candidate[]

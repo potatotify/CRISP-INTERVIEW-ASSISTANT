@@ -1,5 +1,9 @@
 import "./globals.css";
 import ReduxProvider from '@/components/ReduxProvider'
+import type { Metadata } from 'next'
+export const metadata: Metadata = {
+  title: 'Crisp AI Interview',
+}
 export default function RootLayout({
   children,
 }: Readonly<{

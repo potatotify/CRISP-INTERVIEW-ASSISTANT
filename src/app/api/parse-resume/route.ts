@@ -32,9 +32,7 @@ export async function POST(request: NextRequest) {
       name: data.name || null,
       email: data.email || null,
       phone: data.phone || null,
-      skills: data.skills || [],
-      experience: data.experience || [],
-      education: data.education || [],
+  // Removed unused fields: skills, experience, education
       text: `Resume parsed successfully for ${data.name}`
     })
 

@@ -120,3 +120,32 @@
     @apply bg-background text-foreground;
   }
 }
+/* Hide Next.js development indicator */
+#__next-dev-overlay-left,
+#__next-dev-overlay-right,
+.__next-dev-indicator,
+#__next-build-watcher {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -9999 !important;
+}
+
+/* Target the specific circular indicator */
+div[style*="position: fixed"][style*="bottom: 10px"][style*="left: 10px"],
+div[style*="position:fixed"][style*="bottom:10px"][style*="left:10px"] {
+  display: none !important;
+}
+
+/* Hide all fixed positioned elements with "N" or similar indicators */
+div[style*="position: fixed"]:has(div[style*="border-radius"]):has(div[style*="background"]) {
+  display: none !important;
+}
+
+/* More specific targeting */
+[data-nextjs-dev-overlay],
+[data-nextjs-toast-errors] {
+  display: none !important;
+}
+
